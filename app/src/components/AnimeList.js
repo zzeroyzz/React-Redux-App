@@ -1,37 +1,39 @@
-import React from 'react'
+import React, {useEffect} from 'react'
 import { connect } from 'react-redux'
+import {loadDataForLocation} from "../actions/index"
 
+const AnimeList = ({api_data,title,description,isFetching,error,...props}) => {
+  useEffect(() =>{
 
-const AnimeList = (props) => {
-    return (
-        <>
-          {
-            /*
-            ifFetching? showFetching message (not animeList)
-            ifError? showError message (not animeList)
-            if not fetching or error? show animeList
-          */
-            props.isFetching ? (
-              <div>***FETCHING DATA***</div>
-            ) : props.error ? (
-              <div style={{ color: "red" }}>{props.error}</div>
-            ) : (
-              props.animeList.map((anime) => {
-                return <div className="animefacts">{anime.title}</div>;
-              })
-            )
-          }
-        </>
-      );
+  })
+  const handleloadDataForLocation = e =>{
+    e.preventDefault();
+    props.loadDataForLocation()
+  }
+    if(error){
+      return <h2>We got an error: {error}</h2>
+    }
+    if(isFetching){
+      return <h2>Fetching a movie</h2>
+    }
+    return(
+      <>
+      <h1>{api_data.title}</h1>
+      <h2>{api_data.description}</h2>
+      <button onClick={handleloadDataForLocation}> Load new movie</button>
+      </>
+    )
 }
 
 const mapStateToProps =(state)=> {
     return {
         isFetching: state.is_fetching,
-        animeList:state.animeList,
+        api_data:state.api_data,
+        title:state.title,
+        description:state.description,
         error:state.error
     }
 }
 
-export default connect (mapStateToProps,{})(AnimeList);
+export default connect (mapStateToProps,{loadDataForLocation})(AnimeList);
 //AnimeList wants to know what the existing state is so we can update properly

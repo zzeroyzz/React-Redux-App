@@ -3,7 +3,7 @@ import { connect } from 'react-redux';
 import { loadDataForLocation } from '../actions/index'
 const SearchForm = props =>{
  
-    const [searchLocation, setSearchLocation] = useState('remote')
+    const [searchLocation, setSearchLocation] = useState()
 
     const handleChange = e =>{
         setSearchLocation(e.target.value)

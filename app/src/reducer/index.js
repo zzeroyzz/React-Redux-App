@@ -1,10 +1,12 @@
 import { IS_LOADING, DATA_LOAD_SUCCESS, DATA_LOAD_ERROR } from "../actions/index"
 
 const initialState = {
-    //START_FETCHING_DATA
+   api_data:[{ //START_FETCHING_DATA
     is_fetching:false,
-    animeList:[],
-    error:''
+    id:"58611129-2dbc-4a81-a72f-77ddfc1b1b49",
+    description:"",
+    title:"",
+    error:''}]
 }
 
 const animeReducer = (state = initialState, action) => {
@@ -18,7 +20,8 @@ const animeReducer = (state = initialState, action) => {
             return{
                 ...state,
                 is_fetching:false,
-                animelist:action.payload
+                api_data:action.payload,
+                
             }
         }
         case DATA_LOAD_ERROR:

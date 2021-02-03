@@ -11,10 +11,12 @@ export const loadDataForLocation = (location) =>(dispatch)=>{
   console.log(`make your axios call`)
   setTimeout(() =>{
   axios
-  .get(`https://ghibliapi.herokuapp.com/films`)
+  .get(`https://ghibliapi.herokuapp.com/films/58611129-2dbc-4a81-a72f-77ddfc1b1b49  `)
   .then((res) =>{
       console.log(`KH: acions.js loadDataForLocation axios:good`, res)
-      dispatch({type: DATA_LOAD_SUCCESS,payload:res.data.all})
+      dispatch({type: DATA_LOAD_SUCCESS,
+        payload:{title:res.data.title, description:res.data.description}
+      })
   })
   .catch(err =>{
       console.log(`KH acions.js loadDataForLocation axios bad`, err)
